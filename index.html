@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falka Championship</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #f0883e;
+            --accent-hover: #ff9d42;
+            --danger: #da3633;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links button, .admin-link {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-links button:hover, .admin-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        main {
+            max-width: 900px;
+            width: 100%;
+            margin: 30px auto;
+            flex: 1;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .stat-num {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+        }
+
+        .achievement-card {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .achievement-title {
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .achievement-desc {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .achievement-winner {
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        input, select, textarea {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        button.primary {
+            background: var(--accent);
+            color: #000;
+            font-weight: bold;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button.primary:hover {
+            background: var(--accent-hover);
+        }
+
+        button.danger {
+            background: var(--danger);
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .members-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .member-badge {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-admin {
+            cursor: pointer;
+            color: var(--text-muted);
+            background: none;
+            border: none;
+            font-size: 0.85rem;
+        }
+        .footer-admin:hover {
+            color: var(--accent);
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">🐺 FALKA <span style="color:var(--text-muted); font-weight:normal; font-size:0.9rem;">CHAMPIONSHIP</span></div>
+        <div class="nav-links">
+            <button onclick="showView('main')">Kitüntetések és ranglisták</button>
+            <button onclick="showView('members')">Akikre büszkék vagyunk</button>
+            <button onclick="toggleMusic()" id="music-btn">Zene: Ki</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- FŐOLDAL -->
+        <div id="view-main" class="view">
+            <div class="card">
+                <span style="color: var(--accent); font-size: 0.85rem; text-transform: uppercase; font-weight: bold;">A falka küzdelme</span>
+                <h1>Kitüntetések és ranglisták</h1>
+                <p class="subtitle">Az eredmények automatikusan frissülnek, nincs szükség újratöltésre.</p>
+
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <div class="stat-num" id="stat-members-count">4</div>
+                        <div class="stat-label">Taglétszám</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">0</div>
+                        <div class="stat-label">Rögzített csata</div>
+                    </div>
+                </div>
+
+                <div class="grid-3" style="margin-bottom: 20px;">
+                    <div class="achievement-card">
+                        <div class="achievement-title">⚔️ Hódító</div>
+                        <div class="achievement-desc">Csatánként 1 fő. Egyedül megsemmisíti a teljes ellenséges csapatot.</div>
+                        <div class="achievement-winner" id="winner-hodito">1. Még nincs eredmény.</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-title">🎯 A farkas eliminálása</div>
+                        <div class="achievement-desc">Csatánként 1 fő. A játékos eliminálja MrWolfot.</div>
+                        <div class="achievement-winner" id="winner-eliminacio">1. Még nincs eredmény.</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-title">🛡️ A farkas megmentője</div>
+                        <div class="achievement-desc">Több fő is lehet. A játékos megvédi MrWolfot, és megakadályozza az eliminálását.</div>
+                        <div class="achievement-winner" id="winner-megmento">1. Még nincs eredmény.</div>
+                    </div>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-title">📜 Csataelőzmények</div>
+                    <div class="achievement-desc" id="battle-history-text">Még nincs rögzített csata.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAGOK OLDALA -->
+        <div id="view-members" class="view hidden">
+            <div class="card">
+                <span style="color: var(--accent); font-size: 0.85rem; text-transform: uppercase; font-weight: bold;">A falka tagjai</span>
+                <h1>Akikre büszkék vagyunk</h1>
+                <p class="subtitle">ABC sorrendben – válassz egy nevet.</p>
+                <button onclick="showView('main')" style="background:none; border:none; color:var(--accent); cursor:pointer; margin-bottom:15px;">← Vissza a versenyálláshoz</button>
+                <div class="members-grid" id="members-list-container">
+                    <!-- Dinamikusan betöltve -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ADMIN PANEL -->
+        <div id="view-admin" class="view hidden">
+            <div class="card">
+                <span style="color: var(--accent); font-size: 0.85rem; text-transform: uppercase; font-weight: bold;">Falka Admin Panel</span>
+                <h1 style="margin-bottom: 20px;">Vezérlőpult</h1>
+                <button onclick="showView('main')" style="background:none; border:none; color:var(--accent); cursor:pointer; margin-bottom:15px;">← Vissza a weboldalra</button>
+
+                <!-- Játékos hozzáadása -->
+                <div class="stat-box" style="margin-bottom: 20px;">
+                    <h3 style="color:#fff; margin-bottom:10px;">Játékos hozzáadása</h3>
+                    <form onsubmit="addPlayer(event)">
+                        <input type="text" id="new-player-name" placeholder="Játékosnév" required>
+                        <button type="submit" class="primary">Hozzáadás</button>
+                    </form>
+                </div>
+
+                <!-- Kitüntetés rögzítése -->
+                <div class="stat-box">
+                    <h3 style="color:#fff; margin-bottom:10px;">Kitüntetés rögzítése</h3>
+                    <form onsubmit="saveAward(event)">
+                        <input type="text" id="award-battle-id" placeholder="Csata azonosítója (pl. Csata #12)" required>
+                        <input type="date" id="award-date" required>
+                        <select id="award-type">
+                            <option value="hodito">Hódító</option>
+                            <option value="eliminacio">A farkas eliminálása</option>
+                            <option value="megmento">A farkas megmentője</option>
+                        </select>
+                        <select id="award-player">
+                            <!-- Dinamikus játékoslista -->
+                        </select>
+                        <input type="text" id="award-note" placeholder="Megjegyzés (opcionális)">
+                        <button type="submit" class="primary">Kitüntetés mentése</button>
+                    </form>
+                </div>
+
+                <div style="margin-top:20px;">
+                    <button onclick="logoutAdmin()" class="danger">Kijelentkezés</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div>Falka Championship</div>
+        <button class="footer-admin" onclick="openAdmin()">Admin belépés</button>
+    </footer>
+
+    <script>
+        // Alapadatok betöltése localStorage-ból vagy alapértelmezettek
+        let state = JSON.parse(localStorage.getItem('falka_state')) || {
+            players: ["Admin", "PanzerBear", "Picasso", "Wolfl"],
+            awards: {
+                hodito: null,
+                eliminacio: null,
+                megmento: null
+            },
+            history: []
+        };
+
+        function saveState() {
+            localStorage.setItem('falka_state', JSON.stringify(state));
+            updateUI();
+        }
+
+        function showView(viewName) {
+            document.querySelectorAll('.view').forEach(el => el.classList.add('hidden'));
+            document.getElementById('view-' + viewName).classList.remove('hidden');
+            updateUI();
+        }
+
+        function openAdmin() {
+            let pwdpy = prompt("Add meg az admin jelszót (vagy kattints az OK-ra):");
+            showView('admin');
+        }
+
+        function logoutAdmin() {
+            showView('main');
+        }
+
+        let musicPlaying = false;
+        function toggleMusic() {
+            musicPlaying = !musicPlaying;
+            document.getElementById('music-btn').innerText = musicPlaying ? "Zene: Be" : "Zene: Ki";
+        }
+
+        function addPlayer(e) {
+            e.preventDefault();
+            let name = document.getElementById('new-player-name').value.trim();
+            if(name && !state.players.includes(name)) {
+                state.players.push(name);
+                document.getElementById('new-player-name').value = '';
+                saveState();
+                alert("Játékos sikeresen hozzáadva!");
+            }
+        }
+
+        function saveAward(e) {
+            e.preventDefault();
+            let battleId = document.getElementById('award-battle-id').value;
+            let date = document.getElementById('award-date').value;
+            let type = document.getElementById('award-type').value;
+            let player = document.getElementById('award-player').value;
+            
+            state.awards[type] = `${player} (${date} - ${battleId})`;
+            state.history.push(`${date} - ${battleId}: ${type} kitüntetést kapott: ${player}`);
+            saveState();
+            alert("Kitüntetés rögzítve!");
+            showView('main');
+        }
+
+        function updateUI() {
+            // Tagok száma
+            document.getElementById('stat-members-count').innerText = state.players.length;
+
+            // Tagok grid
+            let membersContainer = document.getElementById('members-list-container');
+            membersContainer.innerHTML = '';
+            state.players.slice().sort().forEach(p => {
+                let badge = document.createElement('div');
+                badge.className = 'member-badge';
+                badge.innerText = p;
+                membersContainer.appendChild(badge);
+            });
+
+            // Admin select játékosok feltöltése
+            let selectPlayer = document.getElementById('award-player');
+            if(selectPlayer) {
+                selectPlayer.innerHTML = '';
+                state.players.forEach(p => {
+                    let opt = document.createElement('option');
+                    opt.value = p;
+                    opt.innerText = p;
+                    selectPlayer.appendChild(opt);
+                });
+            }
+
+            // Kitüntetések megjelenítése
+            document.getElementById('winner-hodito').innerText = state.awards.hodito ? "1. " + state.awards.hodito : "1. Még nincs eredmény.";
+            document.getElementById('winner-eliminacio').innerText = state.awards.eliminacio ? "1. " + state.awards.eliminacio : "1. Még nincs eredmény.";
+            document.getElementById('winner-megmento').innerText = state.awards.megmento ? "1. " + state.awards.megmento : "1. Még nincs eredmény.";
+
+            // Történet
+            let historyEl = document.getElementById('battle-history-text');
+            if(state.history.length > 0) {
+                historyEl.innerHTML = state.history.map(h => `<div>• ${h}</div>`).join('');
+            } else {
+                historyEl.innerText = "Még nincs rögzített csata.";
+            }
+        }
+
+        // Első betöltés
+        updateUI();
+    </script>
+</body>
+</html>
