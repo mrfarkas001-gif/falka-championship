@@ -1,0 +1,3 @@
+executioner.png
+wolf_elimination.png
+wolf_savior.png

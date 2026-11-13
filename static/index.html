@@ -1,0 +1,16 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Falka Championship</title><link rel="stylesheet" href="/static/style.css"></head><body>
+<div class="backgrounds"><div class="bg active"></div><div class="bg"></div><div class="bg"></div><div class="bg"></div></div><div class="overlay"></div>
+<header class="top"><div class="brand">🐺 FALKA <small>CHAMPIONSHIP</small></div><div class="live">● ÉLŐ ESEMÉNY</div></header>
+<nav><button id="competitionTab" class="active">Kitüntetések és ranglisták</button><button id="prideTab">Akikre büszkék vagyunk</button><button id="musicButton">♫ Zene: KI</button></nav>
+<main>
+<section id="competition"><p class="eyebrow">A FALKA KÜZDELME</p><h1>Kitüntetések és ranglisták</h1><p class="intro">Az eredmények automatikusan frissülnek, nincs szükség újratöltésre.</p>
+<div class="summary"><div class="panel"><b id="participantCount">0</b><span>Résztvevő</span></div><div class="panel"><b id="battleCount">0</b><span>Rögzített csata</span></div></div>
+<div class="awards">
+<article class="panel award"><h2>🐺 Hóhér</h2><small>Csatánként 1 fő</small><p>Egyedül megsemmisíti a teljes ellenséges csapatot.</p><ol id="executioner"></ol></article>
+<article class="panel award"><h2>🐺 A farkas eliminálása</h2><small>Csatánként 1 fő</small><p>A játékos eliminálja MrWolfot.</p><ol id="wolf_elimination"></ol></article>
+<article class="panel award"><h2>🛡️ A farkas megmentője</h2><small>Több fő is lehet</small><p>A játékos megvédi MrWolfot, és megakadályozza az eliminálását.</p><ol id="wolf_savior"></ol></article></div>
+<section class="panel history"><h2>⚔ Csataelőzmények <small>Legutóbbi 30</small></h2><div id="history"></div></section></section>
+<section id="pride" class="hidden"><p class="eyebrow">A FALKA TAGJAI</p><h1>Akikre büszkék vagyunk</h1><p class="intro">ABC sorrendben – válassz egy nevet.</p><section class="panel names-panel"><button class="back" id="backCompetition">← Vissza a versenyálláshoz</button><div id="names" class="names"></div></section></section>
+<section id="profile" class="hidden"><button class="back" id="backNames">← Vissza a névsorhoz</button><section class="panel profile"><p class="eyebrow">A FALKA TAGJA</p><h1 id="playerName"></h1><div class="stats"><div><b id="battles">0</b><span>Csaták</span></div><div><b id="wins">0</b><span>Nyert csaták</span></div><div><b id="eliminations">0</b><span>Eliminálás</span></div><div><b id="executionerStat">0</b><span>Hóhér</span></div></div></section></section>
+<footer>Falka Championship <a href="/admin">Admin belépés</a></footer></main>
+<audio id="music" loop><source src="/static/audio/background.mp3" type="audio/mpeg"></audio><script src="/static/app.js"></script></body></html>
